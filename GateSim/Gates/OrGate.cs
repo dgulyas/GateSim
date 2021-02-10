@@ -5,47 +5,42 @@ namespace GateSim.Gates
 {
 	public class OrGate : IDevice
 	{
-		public List<bool[]> Inputs { get; set; }
-		public bool[] Output { get; set; }
+		private readonly List<bool[]> m_inputs;
+		public bool[] m_output { get; }
 		public int Id { get; set; }
 
 		private readonly int m_bitWidth;
 
 		public bool Tick()
 		{
-			var oldState = (bool[])Output.Clone();
+			var oldState = (bool[])m_output.Clone();
 			for (int i = 0; i < m_bitWidth; i++)
 			{
-				Output[i] = false;
-				foreach (var input in Inputs)
+				m_output[i] = false;
+				foreach (var input in m_inputs)
 				{
 					if (input[i])
 					{
-						Output[i] = true;
+						m_output[i] = true;
 					}
 				}
 			}
 
-			return !oldState.SequenceEqual(Output);
+			return !oldState.SequenceEqual(m_output);
 		}
 
 		public OrGate(int bitWidth)
 		{
 			m_bitWidth = bitWidth;
-			Inputs = new List<bool[]>();
-			Output = new bool[m_bitWidth];
+			m_inputs = new List<bool[]>();
+			m_output = new bool[m_bitWidth];
 		}
 
 		public bool[] GetNewInput()
 		{
 			var input = new bool[m_bitWidth];
-			Inputs.Add(input);
+			m_inputs.Add(input);
 			return input;
-		}
-
-		public bool[] GetOutput()
-		{
-			return Output;
 		}
 
 		public string GetState()
@@ -53,7 +48,7 @@ namespace GateSim.Gates
 			var state = "";
 			for (int i = 0; i < m_bitWidth; i++)
 			{
-				state += Output[i] ? "1" : "0";
+				state += m_output[i] ? "1" : "0";
 			}
 
 			return state;

@@ -11,8 +11,8 @@ namespace Tests.GateTests
 		{
 			var andGate = new AndGate(4);
 			//Make sure the tick changes the output
-			andGate.GetOutput()[0] = false;
-			andGate.GetOutput()[1] = true;
+			andGate.Output[0] = false;
+			andGate.Output[1] = true;
 
 			for (int i = 0; i < numInputs; i++)
 			{
@@ -28,8 +28,8 @@ namespace Tests.GateTests
 		{
 			var andGate = new AndGate(4);
 			//Make sure the tick changes the output
-			andGate.GetOutput()[0] = false;
-			andGate.GetOutput()[1] = true;
+			andGate.Output[0] = false;
+			andGate.Output[1] = true;
 
 			for (int i = 0; i < numInputs; i++)
 			{

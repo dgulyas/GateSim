@@ -5,16 +5,14 @@ namespace GateSim.Gates
 {
 	public class AndGate : IDevice
 	{
-		public List<bool[]> Inputs { get; set; }
-		public bool[] Output { get; set; }
+		private List<bool[]> Inputs;
+		public bool[] Output { get; }
 		public int Id { get; set; }
-
-		private readonly int m_bitWidth;
 
 		public bool Tick()
 		{
 			var oldState = (bool[]) Output.Clone();
-			for(int i = 0; i < m_bitWidth; i++)
+			for(int i = 0; i < Output.Length; i++)
 			{
 				Output[i] = true;
 				foreach (var input in Inputs)
@@ -31,29 +29,23 @@ namespace GateSim.Gates
 
 		public AndGate(int bitWidth)
 		{
-			m_bitWidth = bitWidth;
 			Inputs = new List<bool[]>();
-			Output = new bool[m_bitWidth];
+			Output = new bool[bitWidth];
 		}
 
 		public bool[] GetNewInput()
 		{
-			var input = new bool[m_bitWidth];
+			var input = new bool[Output.Length];
 			Inputs.Add(input);
 			return input;
-		}
-
-		public bool[] GetOutput()
-		{
-			return Output;
 		}
 
 		public string GetState()
 		{
 			var state = "";
-			for (int i = 0; i < m_bitWidth; i++)
+			foreach (var x in Output)
 			{
-				state += Output[i] ? "1" : "0";
+				state += x ? "1" : "0";
 			}
 
 			return state;

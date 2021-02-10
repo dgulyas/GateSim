@@ -43,12 +43,12 @@ namespace GateSim
 			var const3 = CreateDevice(new ConstantOutput(m_bitWidth, true));
 			const3.SetSpecificBit(4, false);
 
-			Connect(and1.GetOutput(), and2.GetNewInput());
+			Connect(and1.Output, and2.GetNewInput());
 			Connect(const3.GetOutput(), and2.GetNewInput());
 
 			var not1 = CreateDevice(new NotGate(m_bitWidth));
 
-			Connect(and2.GetOutput(), not1.GetInput());
+			Connect(and2.Output, not1.GetInput());
 
 			for (int i = 0; i < 10; i++)
 			{
