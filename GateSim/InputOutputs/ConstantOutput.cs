@@ -5,12 +5,8 @@ namespace GateSim.InputOutputs
 {
 	public class ConstantOutput : IDevice
 	{
-		public bool[] m_output { get; set; }
+		public bool[] Output { get; }
 		public int Id { get; set; }
-
-		public int Result = 0;
-		public bool ConstantValue;
-		public int BitWidth;
 
 		public bool Tick()
 		{
@@ -19,33 +15,32 @@ namespace GateSim.InputOutputs
 
 		public ConstantOutput(int bitWidth, bool constantValue)
 		{
-			BitWidth = bitWidth;
-			ConstantValue = constantValue;
-			m_output = Enumerable.Repeat(ConstantValue, bitWidth).ToArray();
+			Output = Enumerable.Repeat(constantValue, bitWidth).ToArray();
 		}
 
-		public bool[] GetOutput()
+		public ConstantOutput(bool[] startingValue)
 		{
-			return m_output;
+			Output = new bool[startingValue.Length];
+			SetOutputDeep(startingValue);
 		}
 
-		//Deep copy the values in newOutput into m_output.
+		//Deep copy the values in newOutput into Output.
 		public void SetOutputDeep(bool[] newOutput)
 		{
-			if (newOutput.Length != m_output.Length)
+			if (newOutput.Length != Output.Length)
 			{
 				throw new Exception("newOutput is the wrong width");
 			}
 
-			for (int i = 0; i < m_output.Length; i++)
+			for (int i = 0; i < Output.Length; i++)
 			{
-				m_output[i] = newOutput[i];
+				Output[i] = newOutput[i];
 			}
 		}
 
 		public void SetSpecificBit(int bitNum, bool newValue)
 		{
-			m_output[bitNum] = newValue;
+			Output[bitNum] = newValue;
 		}
 
 	}

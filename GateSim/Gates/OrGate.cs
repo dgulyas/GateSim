@@ -43,16 +43,5 @@ namespace GateSim.Gates
 			return input;
 		}
 
-		public string GetState()
-		{
-			var state = "";
-			for (int i = 0; i < m_bitWidth; i++)
-			{
-				state += m_output[i] ? "1" : "0";
-			}
-
-			return state;
-		}
-
 	}
 }

@@ -4,8 +4,8 @@ namespace GateSim.Gates
 {
 	public class NotGate : IDevice
 	{
-		public bool[] Input { get; set; }
-		public bool[] Output { get; set; }
+		public bool[] Input { get; }
+		public bool[] Output { get; }
 		public int Id { get; set; }
 
 		private readonly int m_bitWidth;
@@ -26,27 +26,6 @@ namespace GateSim.Gates
 			m_bitWidth = bitWidth;
 			Input = new bool[bitWidth];
 			Output = new bool[m_bitWidth];
-		}
-
-		public bool[] GetInput()
-		{
-			return Input;
-		}
-
-		public bool[] GetOutput()
-		{
-			return Output;
-		}
-
-		public string GetState()
-		{
-			var state = "";
-			for (int i = 0; i < m_bitWidth; i++)
-			{
-				state += Output[i] ? "1" : "0";
-			}
-
-			return state;
 		}
 
 	}

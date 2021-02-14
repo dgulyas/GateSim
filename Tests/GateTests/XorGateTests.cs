@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace Tests.GateTests
 {
-	[TestFixture()]
+	[TestFixture]
 	public class XorGateTests
 	{
 		[TestCase(1, true)]

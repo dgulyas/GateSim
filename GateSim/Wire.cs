@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GateSim
 {
@@ -8,9 +7,9 @@ namespace GateSim
 	{
 		public int BitWidth { get; }
 
-		private bool[] m_input;
+		private readonly bool[] m_input;
 
-		private List<bool[]> m_outputs = new List<bool[]>();
+		private readonly List<bool[]> m_outputs = new List<bool[]>();
 
 		public Wire(bool[] input)
 		{
