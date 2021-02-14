@@ -36,7 +36,7 @@ namespace GateSim
 			m_outputs.Add(output);
 		}
 
-		public bool CopyInputToOutput()
+		public void CopyInputToOutput()
 		{
 			foreach (var output in m_outputs)
 			{
@@ -45,8 +45,6 @@ namespace GateSim
 					output[i] = m_input[i];
 				}
 			}
-
-			return false;
 		}
 
 	}

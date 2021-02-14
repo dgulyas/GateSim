@@ -91,10 +91,7 @@ namespace GateSim
 
 				foreach (var wire in m_wires)
 				{
-					if (wire.CopyInputToOutput())
-					{
-						somethingChanged = true;
-					}
+					wire.CopyInputToOutput();
 				}
 
 				foreach (var device in m_devices)

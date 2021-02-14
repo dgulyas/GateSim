@@ -50,8 +50,10 @@
     <Compile Include="IDevice.cs" />
     <Compile Include="InputOutputs\ConstantOutput.cs" />
     <Compile Include="Memory\Register.cs" />
+    <Compile Include="Plexers\Multiplexer.cs" />
     <Compile Include="Sim.cs" />
-    <Compile Include="Wire.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Wiring\Wire.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
