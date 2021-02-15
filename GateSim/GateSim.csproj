@@ -51,6 +51,7 @@
     <Compile Include="InputOutputs\ConstantOutput.cs" />
     <Compile Include="Memory\Register.cs" />
     <Compile Include="Plexers\Multiplexer.cs" />
+    <Compile Include="Plexers\Decoder.cs" />
     <Compile Include="Sim.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Wiring\Wire.cs" />

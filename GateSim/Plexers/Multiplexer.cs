@@ -18,7 +18,7 @@ namespace GateSim.Plexers
 		{
 			var oldState = (bool[])Output.Clone();
 
-			var chosenInput = ConvertBoolArrayToInt(InputSelect);
+			var chosenInput = Util.ConvertBoolArrayToInt(InputSelect);
 
 			for (int i = 0; i < Output.Length; i++)
 			{
@@ -47,18 +47,5 @@ namespace GateSim.Plexers
 			return m_inputs[index];
 		}
 
-		private static int ConvertBoolArrayToInt(bool[] array)
-		{
-			var workingTotal = 0;
-			for (int i = array.Length - 1; i >= 0; i--)
-			{
-				if (array[i])
-				{
-					workingTotal += (int) Math.Pow(2, i);
-				}
-			}
-
-			return workingTotal;
-		}
 	}
 }
