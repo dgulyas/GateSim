@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GateSim.Plexers
 {
@@ -11,8 +7,11 @@ namespace GateSim.Plexers
 	{
 		private readonly bool[][] m_inputs;
 		public bool[] Output { get; }
-		public bool[] InputSelect { get; }
 
+		/// <summary>
+		/// The least significant digit is index 0. {true, false, false} selects input 1 not 4.
+		/// </summary>
+		public bool[] InputSelect { get; }
 
 		public int Id { get; set; }
 		public bool Tick()
