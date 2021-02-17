@@ -15,7 +15,7 @@ namespace Tests.Plexers
 			var dec = new Decoder(2);
 			TestHelpers.SetArrayToValues(dec.OutputSelect, selectorValue);
 
-			//Decoders start with output 0 set to high, so nothings changes on tick
+			//Decoders start with output 0 set to high, so nothings changes during tick
 			Assert.AreEqual(selectedOutputIndex != 0, dec.Tick());
 
 			for (int i = 0; i < 4; i++)

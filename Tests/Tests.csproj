@@ -59,6 +59,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers.cs" />
     <Compile Include="UtilTests.cs" />
+    <Compile Include="Wiring\SplitterTests.cs" />
+    <Compile Include="Wiring\WireTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
