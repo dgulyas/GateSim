@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GateSim
 {
@@ -20,6 +16,17 @@ namespace GateSim
 			}
 
 			return workingTotal;
+		}
+
+		public static string ArrayToString(bool[] array)
+		{
+			var state = "";
+			foreach (var x in array)
+			{
+				state += x ? "1" : "0";
+			}
+
+			return state;
 		}
 
 	}

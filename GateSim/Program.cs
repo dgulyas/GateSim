@@ -1,12 +1,13 @@
-﻿
+﻿using GateSim.Simulations;
+
 namespace GateSim
 {
 	public class Program
 	{
 		static void Main(string[] args)
 		{
-			var sim = new Sim();
-			sim.Run();
+			var adder = new Adder();
+			adder.Test();
 		}
 
 	}

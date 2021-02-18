@@ -5,8 +5,8 @@ namespace GateSim.Gates
 {
 	public class XorGate : IDevice
 	{
-		public List<bool[]> Inputs { get; set; }
-		public bool[] Output { get; set; }
+		private readonly List<bool[]> m_inputs;
+		public bool[] Output { get; }
 		public int Id { get; set; }
 
 		private readonly int m_bitWidth;
@@ -18,7 +18,7 @@ namespace GateSim.Gates
 			for (int i = 0; i < m_bitWidth; i++)
 			{
 				Output[i] = false;
-				foreach (var input in Inputs)
+				foreach (var input in m_inputs)
 				{
 					if (input[i])
 					{
@@ -33,20 +33,15 @@ namespace GateSim.Gates
 		public XorGate(int bitWidth)
 		{
 			m_bitWidth = bitWidth;
-			Inputs = new List<bool[]>();
+			m_inputs = new List<bool[]>();
 			Output = new bool[m_bitWidth];
 		}
 
 		public bool[] GetNewInput()
 		{
 			var input = new bool[m_bitWidth];
-			Inputs.Add(input);
+			m_inputs.Add(input);
 			return input;
-		}
-
-		public bool[] GetOutput()
-		{
-			return Output;
 		}
 
 	}

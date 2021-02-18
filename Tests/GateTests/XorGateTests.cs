@@ -14,8 +14,8 @@ namespace Tests.GateTests
 		{
 			var xorGate = new XorGate(4);
 			//Make sure the tick changes the output
-			xorGate.GetOutput()[0] = false;
-			xorGate.GetOutput()[1] = true;
+			xorGate.Output[0] = false;
+			xorGate.Output[1] = true;
 
 			for (int i = 0; i < numInputs; i++)
 			{

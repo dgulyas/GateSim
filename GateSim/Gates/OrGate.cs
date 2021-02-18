@@ -6,34 +6,34 @@ namespace GateSim.Gates
 	public class OrGate : IDevice
 	{
 		private readonly List<bool[]> m_inputs;
-		public bool[] m_output { get; }
+		public bool[] Output { get; }
 		public int Id { get; set; }
 
 		private readonly int m_bitWidth;
 
 		public bool Tick()
 		{
-			var oldState = (bool[])m_output.Clone();
+			var oldState = (bool[])Output.Clone();
 			for (int i = 0; i < m_bitWidth; i++)
 			{
-				m_output[i] = false;
+				Output[i] = false;
 				foreach (var input in m_inputs)
 				{
 					if (input[i])
 					{
-						m_output[i] = true;
+						Output[i] = true;
 					}
 				}
 			}
 
-			return !oldState.SequenceEqual(m_output);
+			return !oldState.SequenceEqual(Output);
 		}
 
 		public OrGate(int bitWidth)
 		{
 			m_bitWidth = bitWidth;
 			m_inputs = new List<bool[]>();
-			m_output = new bool[m_bitWidth];
+			Output = new bool[m_bitWidth];
 		}
 
 		public bool[] GetNewInput()

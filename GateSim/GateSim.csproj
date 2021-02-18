@@ -53,6 +53,7 @@
     <Compile Include="Plexers\Multiplexer.cs" />
     <Compile Include="Plexers\Decoder.cs" />
     <Compile Include="Sim.cs" />
+    <Compile Include="Simulations\Adder.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Wiring\Splitter.cs" />
     <Compile Include="Wiring\Wire.cs" />
