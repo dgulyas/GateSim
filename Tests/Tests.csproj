@@ -51,7 +51,8 @@
   <ItemGroup>
     <Compile Include="GateTests\AndGateTests.cs" />
     <Compile Include="GateTests\XorGateTests.cs" />
-    <Compile Include="InputOutputs\ConstantOutputTests.cs" />
+    <Compile Include="Memory\CounterTests.cs" />
+    <Compile Include="Wiring\ConstantOutputTests.cs" />
     <Compile Include="Memory\RegisterTests.cs" />
     <Compile Include="Plexers\DecoderTests.cs" />
     <Compile Include="Plexers\MultiplexerTests.cs" />
@@ -72,6 +73,7 @@
       <Name>GateSim</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

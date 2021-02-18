@@ -1,6 +1,6 @@
 ﻿using System;
 using GateSim.Gates;
-using GateSim.InputOutputs;
+using GateSim.Wiring;
 
 namespace GateSim.Simulations
 {

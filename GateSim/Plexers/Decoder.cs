@@ -10,7 +10,7 @@ namespace GateSim.Plexers
 
 		public bool Tick()
 		{
-			var selectedOutputIndex = Util.ConvertBoolArrayToInt(OutputSelect);
+			var selectedOutputIndex = OutputSelect.ToInt();
 			var outputChanging = !m_outputs[selectedOutputIndex][0]; //If the selected output isn't true, it needs to change
 
 			if (outputChanging)
@@ -32,7 +32,7 @@ namespace GateSim.Plexers
 			}
 
 			//Set initial state
-			var outputActive = Util.ConvertBoolArrayToInt(OutputSelect);
+			var outputActive = OutputSelect.ToInt();
 			SetSelectedOutTrueOthersFalse(outputActive);
 		}
 

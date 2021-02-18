@@ -1,7 +1,7 @@
-﻿using GateSim.InputOutputs;
+﻿using GateSim.Wiring;
 using NUnit.Framework;
 
-namespace Tests.InputOutputs
+namespace Tests.Wiring
 {
 	[TestFixture]
 	public class ConstantOutputTests

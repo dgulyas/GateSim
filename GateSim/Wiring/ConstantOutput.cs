@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace GateSim.InputOutputs
+namespace GateSim.Wiring
 {
 	public class ConstantOutput : IDevice
 	{
