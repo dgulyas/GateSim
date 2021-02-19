@@ -1,5 +1,4 @@
-﻿using System;
-using GateSim.Gates;
+﻿using GateSim.Gates;
 using GateSim.Wiring;
 
 namespace GateSim.Simulations
@@ -8,7 +7,7 @@ namespace GateSim.Simulations
 	{
 		//Refrence Adder.cs for diagram
 
-		public void Run(bool aInput, bool bInput, bool cInput, bool sOutput, bool cOutput)
+		public (bool[], bool[]) Run(bool aInput, bool bInput, bool cInput)
 		{
 			var sim = new Sim();
 
@@ -37,28 +36,9 @@ namespace GateSim.Simulations
 			sim.Connect(and1.Output, or1.GetNewInput());
 			sim.Connect(and2.Output, or1.GetNewInput());
 
-			var outputS = xor2.Output;
-			var outputCout = or1.Output;
-
 			sim.SettleState();
 
-			if (outputS[0] != sOutput || outputCout[0] != cOutput)
-			{
-				throw new Exception("Wrong");
-			}
-
-		}
-
-		public void Test()
-		{ //This should be a nUnit test
-			Run(false, false, false, false, false);
-			Run(false, false, true, true, false);
-			Run(false, true, false, true, false);
-			Run(false, true, true, false, true);
-			Run(true, false, false, true, false);
-			Run(true, false, true, false, true);
-			Run(true, true, false, false, true);
-			Run(true, true, true, true, true);
+			return (xor2.Output, or1.Output);
 		}
 
 	}

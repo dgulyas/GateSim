@@ -6,8 +6,7 @@ namespace GateSim
 	{
 		static void Main(string[] args)
 		{
-			var adder = new Adder();
-			adder.Test();
+
 		}
 
 	}
