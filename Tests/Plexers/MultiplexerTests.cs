@@ -1,4 +1,5 @@
-﻿using GateSim.Plexers;
+﻿using GateSim;
+using GateSim.Plexers;
 using NUnit.Framework;
 
 namespace Tests.Plexers
@@ -26,7 +27,7 @@ namespace Tests.Plexers
 		{
 			var mux = new Multiplexer(4, 2);
 			SetMuxInputs(mux);
-			TestHelpers.SetArrayToValues(mux.InputSelect, selectInput);
+			Util.SetArrayToValues(mux.InputSelect, selectInput);
 			Assert.IsTrue(mux.Tick());
 			Assert.AreEqual(m_inputs[inputNumber], mux.Output);
 		}
@@ -35,7 +36,7 @@ namespace Tests.Plexers
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				TestHelpers.SetArrayToValues(m.GetInput(i), m_inputs[i]);
+				Util.SetArrayToValues(m.GetInput(i), m_inputs[i]);
 			}
 		}
 

@@ -1,4 +1,5 @@
-﻿using GateSim.Gates;
+﻿using GateSim;
+using GateSim.Gates;
 using NUnit.Framework;
 
 namespace Tests.GateTests
@@ -16,7 +17,7 @@ namespace Tests.GateTests
 
 			for (int i = 0; i < numInputs; i++)
 			{
-				TestHelpers.SetArrayToValue(andGate.GetNewInput(), inputValue);
+				Util.SetArrayToValue(andGate.GetNewInput(), inputValue);
 			}
 
 			Assert.IsTrue(andGate.Tick());
@@ -33,9 +34,9 @@ namespace Tests.GateTests
 
 			for (int i = 0; i < numInputs; i++)
 			{
-				TestHelpers.SetArrayToValue(andGate.GetNewInput(), inputValue);
+				Util.SetArrayToValue(andGate.GetNewInput(), inputValue);
 			}
-			TestHelpers.SetArrayToValue(andGate.GetNewInput(), !inputValue);
+			Util.SetArrayToValue(andGate.GetNewInput(), !inputValue);
 
 			Assert.IsTrue(andGate.Tick());
 			Assert.AreEqual(new[] { false, false, false, false }, andGate.Output);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GateSim;
 using GateSim.Wiring;
 using NUnit.Framework;
 
@@ -29,7 +30,7 @@ namespace Tests.Wiring
 			};
 
 			var split = new Splitter(16, mapping);
-			TestHelpers.SetArrayToValues(split.Input, input);
+			Util.SetArrayToValues(split.Input, input);
 
 			Assert.IsTrue(split.Tick());
 
@@ -54,7 +55,7 @@ namespace Tests.Wiring
 			};
 
 			var split = new Splitter(3, mapping);
-			TestHelpers.SetArrayToValues(split.Input, input);
+			Util.SetArrayToValues(split.Input, input);
 
 			Assert.IsTrue(split.Tick());
 			Assert.IsFalse(split.Tick());

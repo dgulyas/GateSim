@@ -1,4 +1,5 @@
-﻿using GateSim.Gates;
+﻿using GateSim;
+using GateSim.Gates;
 using NUnit.Framework;
 
 namespace Tests.GateTests
@@ -19,7 +20,7 @@ namespace Tests.GateTests
 
 			for (int i = 0; i < numInputs; i++)
 			{
-				TestHelpers.SetArrayToValue(xorGate.GetNewInput(), true);
+				Util.SetArrayToValue(xorGate.GetNewInput(), true);
 			}
 
 			Assert.IsTrue(xorGate.Tick());

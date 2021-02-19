@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using GateSim;
+using NUnit.Framework;
 using GateSim.Plexers;
 
 namespace Tests.Plexers
@@ -13,7 +14,7 @@ namespace Tests.Plexers
 		public void OutputsSetToCorrectValues(int selectedOutputIndex, bool[] selectorValue)
 		{
 			var dec = new Decoder(2);
-			TestHelpers.SetArrayToValues(dec.OutputSelect, selectorValue);
+			Util.SetArrayToValues(dec.OutputSelect, selectorValue);
 
 			//Decoders start with output 0 set to high, so nothings changes during tick
 			Assert.AreEqual(selectedOutputIndex != 0, dec.Tick());

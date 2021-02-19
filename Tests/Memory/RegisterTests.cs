@@ -1,4 +1,5 @@
-﻿using GateSim.Memory;
+﻿using GateSim;
+using GateSim.Memory;
 using NUnit.Framework;
 
 namespace Tests.Memory
@@ -17,7 +18,7 @@ namespace Tests.Memory
 			Assert.AreEqual(m_allFalseInput, reg.Output);
 			Assert.AreEqual(false, reg.Clock[0]);
 			var newInput = m_variedInput;
-			TestHelpers.SetArrayToValues(reg.Input, newInput);
+			Util.SetArrayToValues(reg.Input, newInput);
 			reg.Clock[0] = true;
 
 			Assert.IsTrue(reg.Tick());
@@ -31,7 +32,7 @@ namespace Tests.Memory
 			Assert.AreEqual(m_allFalseInput, reg.Output);
 			Assert.AreEqual(false, reg.Clock[0]);
 			var newInput = m_variedInput;
-			TestHelpers.SetArrayToValues(reg.Input, newInput);
+			Util.SetArrayToValues(reg.Input, newInput);
 
 			Assert.IsFalse(reg.Tick());
 			Assert.AreEqual(m_allFalseInput, reg.Output);
@@ -45,7 +46,7 @@ namespace Tests.Memory
 			reg.Tick();
 			Assert.AreEqual(m_allFalseInput, reg.Output);
 			var newInput = m_variedInput;
-			TestHelpers.SetArrayToValues(reg.Input, newInput);
+			Util.SetArrayToValues(reg.Input, newInput);
 			reg.Clock[0] = false;
 
 			Assert.IsFalse(reg.Tick());
