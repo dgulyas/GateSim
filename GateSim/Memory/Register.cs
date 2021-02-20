@@ -8,6 +8,7 @@ namespace GateSim.Memory
 		public bool[] Input { get; }
 		public bool[] Output { get; }
 		public bool[] Clear { get; }
+		public bool[] Enable { get; }
 		public bool[] Clock { get; }
 		private bool[] m_clockAtPreviousTick;
 
@@ -19,7 +20,7 @@ namespace GateSim.Memory
 			{
 				Array.Clear(Output, 0, Output.Length);
 			}
-			else if (!m_clockAtPreviousTick[0] && Clock[0]) //if the clock has a rising edge
+			else if (Enable[0] && !m_clockAtPreviousTick[0] && Clock[0]) //if the clock has a rising edge
 			{
 				for (int i = 0; i < Output.Length; i++)
 				{
@@ -35,6 +36,7 @@ namespace GateSim.Memory
 			Input = new bool[bitWidth];
 			Output = new bool[bitWidth];
 			Clear = new bool[1];
+			Enable = new bool[1];
 			Clock = new bool[1];
 			m_clockAtPreviousTick = new bool[1];
 		}

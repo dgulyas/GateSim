@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GateSim
+namespace GateSim.Wiring
 {
 	public class Wire
 	{

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GateSim;
+using GateSim.Wiring;
 using NUnit.Framework;
 
 namespace Tests.Wiring

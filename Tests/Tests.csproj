@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="GateTests\AndGateTests.cs" />
     <Compile Include="GateTests\XorGateTests.cs" />
+    <Compile Include="InputOutput\TTYTests.cs" />
     <Compile Include="Memory\CounterTests.cs" />
     <Compile Include="Simulations\AdderTests.cs" />
     <Compile Include="Wiring\ConstantOutputTests.cs" />

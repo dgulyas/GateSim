@@ -1,5 +1,4 @@
-﻿using GateSim.Simulations;
-
+﻿
 namespace GateSim
 {
 	public class Program

@@ -48,6 +48,7 @@
     <Compile Include="Gates\AndGate.cs" />
     <Compile Include="Gates\XorGate.cs" />
     <Compile Include="IDevice.cs" />
+    <Compile Include="InputOutput\Tty.cs" />
     <Compile Include="Wiring\ConstantOutput.cs" />
     <Compile Include="Memory\Counter.cs" />
     <Compile Include="Memory\Register.cs" />

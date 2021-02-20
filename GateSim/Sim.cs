@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GateSim.Gates;
+using GateSim.Wiring;
 
 namespace GateSim
 {
