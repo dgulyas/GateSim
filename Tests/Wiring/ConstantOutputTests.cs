@@ -1,12 +1,11 @@
 ﻿using GateSim.Wiring;
-using NUnit.Framework;
 
 namespace Tests.Wiring
 {
-	[TestFixture]
+	[TestClass]
 	public class ConstantOutputTests
 	{
-		[Test]
+		[TestMethod]
 		public void DeepCopyCreatesNewArray()
 		{
 			var output = new ConstantOutput(4, false);
@@ -20,7 +19,7 @@ namespace Tests.Wiring
 			Assert.AreEqual(true, output.Output[0]);
 		}
 
-		[Test]
+		[TestMethod]
 		public void DeepCopyConstructorCreatesNewArray()
 		{
 			var newOutput = new[] { true, false, true, false };

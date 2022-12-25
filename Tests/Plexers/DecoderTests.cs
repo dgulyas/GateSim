@@ -1,16 +1,16 @@
 ﻿using GateSim;
-using NUnit.Framework;
 using GateSim.Plexers;
 
 namespace Tests.Plexers
 {
-	[TestFixture]
+	[TestClass]
 	public class DecoderTests
 	{
-		[TestCase(0, new []{false, false})]
-		[TestCase(1, new []{true, false})]
-		[TestCase(2, new []{false, true})]
-		[TestCase(3, new []{true, true})]
+		[DataTestMethod]
+		[DataRow(0, new []{false, false})]
+		[DataRow(1, new []{true, false})]
+		[DataRow(2, new []{false, true})]
+		[DataRow(3, new []{true, true})]
 		public void OutputsSetToCorrectValues(int selectedOutputIndex, bool[] selectorValue)
 		{
 			var dec = new Decoder(2);

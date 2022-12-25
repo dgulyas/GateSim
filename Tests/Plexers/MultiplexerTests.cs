@@ -1,17 +1,14 @@
 ﻿using GateSim;
 using GateSim.Plexers;
-using NUnit.Framework;
 
 namespace Tests.Plexers
 {
-	[TestFixture]
+	[TestClass]
 	public class MultiplexerTests
 	{
 		private bool[][] m_inputs;
 
-		[OneTimeSetUp]
-		public void Setup()
-		{
+		public MultiplexerTests(){
 			m_inputs = new bool[4][];
 			m_inputs[0] = new[] { false, true, false, false };
 			m_inputs[1] = new[] { false, true, true, false };
@@ -19,17 +16,18 @@ namespace Tests.Plexers
 			m_inputs[3] = new[] { true, false, false, false };
 		}
 
-		[TestCase(0, new[] {false, false})]
-		[TestCase(1, new[] {true, false})]
-		[TestCase(2, new[] {false, true})]
-		[TestCase(3, new[] {true, true})]
+		[DataTestMethod]
+		[DataRow(0, new[] {false, false})]
+		[DataRow(1, new[] {true, false})]
+		[DataRow(2, new[] {false, true})]
+		[DataRow(3, new[] {true, true})]
 		public void CorrectInputGoesToOutput(int inputNumber, bool[] selectInput)
 		{
 			var mux = new Multiplexer(4, 2);
 			SetMuxInputs(mux);
 			Util.SetArrayToValues(mux.InputSelect, selectInput);
 			Assert.IsTrue(mux.Tick());
-			Assert.AreEqual(m_inputs[inputNumber], mux.Output);
+			CollectionAssert.AreEqual(m_inputs[inputNumber], mux.Output);
 		}
 
 		private void SetMuxInputs(Multiplexer m)

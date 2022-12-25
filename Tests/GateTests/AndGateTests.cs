@@ -1,14 +1,19 @@
 ﻿using GateSim;
 using GateSim.Gates;
-using NUnit.Framework;
 
 namespace Tests.GateTests
 {
-	[TestFixture]
+	[TestClass]
 	public class AndGateTests
 	{
-		[Test]
-		public void AllInputsSame([Values(1,2,20)]int numInputs, [Values(true, false)]bool inputValue)
+		[DataTestMethod]
+		[DataRow(1, true)]
+		[DataRow(2, true)]
+		[DataRow(20, true)]
+		[DataRow(1, false)]
+		[DataRow(2, false)]
+		[DataRow(20, false)]
+		public void AllInputsSame(int numInputs, bool inputValue)
 		{
 			var andGate = new AndGate(4);
 			//Make sure the tick changes the output
@@ -21,11 +26,15 @@ namespace Tests.GateTests
 			}
 
 			Assert.IsTrue(andGate.Tick());
-			Assert.AreEqual(new []{ inputValue, inputValue, inputValue, inputValue }, andGate.Output);
+			CollectionAssert.AreEqual(new []{ inputValue, inputValue, inputValue, inputValue }, andGate.Output);
 		}
 
-		[Test]
-		public void OneInputDifferent([Values(1, 20)]int numInputs, [Values(true, false)]bool inputValue)
+		[DataTestMethod]
+		[DataRow(1, true)]
+		[DataRow(20, true)]
+		[DataRow(1, false)]
+		[DataRow(20, false)]
+		public void OneInputDifferent(int numInputs, bool inputValue)
 		{
 			var andGate = new AndGate(4);
 			//Make sure the tick changes the output
@@ -39,7 +48,7 @@ namespace Tests.GateTests
 			Util.SetArrayToValue(andGate.GetNewInput(), !inputValue);
 
 			Assert.IsTrue(andGate.Tick());
-			Assert.AreEqual(new[] { false, false, false, false }, andGate.Output);
+			CollectionAssert.AreEqual(new[] { false, false, false, false }, andGate.Output);
 		}
 	}
 }

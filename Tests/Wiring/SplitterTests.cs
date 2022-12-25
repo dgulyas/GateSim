@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using GateSim;
 using GateSim.Wiring;
-using NUnit.Framework;
 
 namespace Tests.Wiring
 {
-	[TestFixture]
+	[TestClass]
 	public class SplitterTests
 	{
-		[Test]
+		[TestMethod]
 		public void InputIsCopiedToOutputsCorrectly()
 		{
 			var out0 = new [] {true};
@@ -34,14 +33,14 @@ namespace Tests.Wiring
 
 			Assert.IsTrue(split.Tick());
 
-			Assert.AreEqual(out0, split.GetOutput(0));
-			Assert.AreEqual(out1, split.GetOutput(1));
-			Assert.AreEqual(out2, split.GetOutput(2));
-			Assert.AreEqual(out3, split.GetOutput(3));
-			Assert.AreEqual(out4, split.GetOutput(4));
+			CollectionAssert.AreEqual(out0, split.GetOutput(0));
+			CollectionAssert.AreEqual(out1, split.GetOutput(1));
+			CollectionAssert.AreEqual(out2, split.GetOutput(2));
+			CollectionAssert.AreEqual(out3, split.GetOutput(3));
+			CollectionAssert.AreEqual(out4, split.GetOutput(4));
 		}
 
-		[Test]
+		[TestMethod]
 		public void TickReturnsFalseIfNothingChanged()
 		{
 			var out0 = new[] { true };

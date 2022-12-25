@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using GateSim.Wiring;
-using NUnit.Framework;
 
 namespace Tests.Wiring
 {
-	[TestFixture]
+	[TestClass]
 	public class WireTests
 	{
-		[Test]
-		public void InputIsCopiedMultipleOutputs([Values(2,10)]int numOutputs)
+		[DataTestMethod]
+		[DataRow(2)]
+		[DataRow(10)]
+		public void InputIsCopiedMultipleOutputs(int numOutputs)
 		{
 			var input = new [] {true, false, true, false};
 			var outputs = new List<bool[]>();
@@ -24,11 +25,11 @@ namespace Tests.Wiring
 
 			foreach (var output in outputs)
 			{
-				Assert.AreEqual(input, output);
+				CollectionAssert.AreEqual(input, output);
 			}
 		}
 
-		[Test]
+		[TestMethod]
 		public void InputIsCopiedToSingleOutput()
 		{
 			var input = new[] { true, false, true, false };
@@ -37,7 +38,7 @@ namespace Tests.Wiring
 
 			Assert.AreNotEqual(input, output);
 			wire.CopyInputToOutput();
-			Assert.AreEqual(input, output);
+			CollectionAssert.AreEqual(input, output);
 		}
 	}
 }

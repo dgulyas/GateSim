@@ -1,20 +1,18 @@
 ﻿using GateSim;
 using GateSim.InputOutput;
-using NUnit.Framework;
 
 namespace Tests.InputOutput
 {
-	[TestFixture]
+	[TestClass]
 	public class TtyTests
 	{
 		private readonly int m_bitWidth = 8;
 
-		//private Action<char> thing;
-
-		[TestCase(65, 'A')]
-		[TestCase(66, 'B')]
-		[TestCase(48, '0')]
-		[TestCase(38, '&')]
+		[DataTestMethod] 
+		[DataRow(65, 'A')]
+		[DataRow(66, 'B')]
+		[DataRow(48, '0')]
+		[DataRow(38, '&')]
 		public void TTYPrintsCorrectChar(int input, char printedChar)
 		{
 			char outputChar = '.';
@@ -29,7 +27,7 @@ namespace Tests.InputOutput
 			Assert.AreEqual(printedChar, outputChar);
 		}
 
-		[Test]
+		[TestMethod]
 		public void TTYPrintsNothingWhenEnableLow()
 		{
 			char outputChar = '.';

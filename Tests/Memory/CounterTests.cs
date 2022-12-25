@@ -1,13 +1,12 @@
 ﻿using GateSim;
 using GateSim.Memory;
-using NUnit.Framework;
 
 namespace Tests.Memory
 {
-	[TestFixture]
+	[TestClass]
 	public class CounterTests
 	{
-		[Test]
+		[TestMethod]
 		public void IncrementsOnRisingClockEdge()
 		{
 			var counter = new Counter(4);
@@ -23,7 +22,7 @@ namespace Tests.Memory
 			}
 		}
 
-		[Test]
+		[TestMethod]
 		public void ClearsWhenClearHigh()
 		{
 			var counter = new Counter(4);
@@ -42,7 +41,7 @@ namespace Tests.Memory
 			Assert.AreEqual(0, counter.Output.ToInt());
 		}
 
-		[Test]
+		[TestMethod]
 		public void LoadsWhenLoadHigh()
 		{
 			var bitWidth = 4;

@@ -1,16 +1,16 @@
 ﻿using GateSim;
 using GateSim.Gates;
-using NUnit.Framework;
 
 namespace Tests.GateTests
 {
-	[TestFixture]
+	[TestClass]
 	public class XorGateTests
 	{
-		[TestCase(1, true)]
-		[TestCase(2, false)]
-		[TestCase(3, true)]
-		[TestCase(20, false)]
+		[DataTestMethod] 
+		[DataRow(1, true)]
+		[DataRow(2, false)]
+		[DataRow(3, true)]
+		[DataRow(20, false)]
 		public void AllInputsSame(int numInputs, bool expectedOutput)
 		{
 			var xorGate = new XorGate(4);
@@ -24,7 +24,7 @@ namespace Tests.GateTests
 			}
 
 			Assert.IsTrue(xorGate.Tick());
-			Assert.AreEqual(new[] { expectedOutput, expectedOutput, expectedOutput, expectedOutput }, xorGate.Output);
+			CollectionAssert.AreEqual(new[] { expectedOutput, expectedOutput, expectedOutput, expectedOutput }, xorGate.Output);
 		}
 	}
 }
