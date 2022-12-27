@@ -5,9 +5,16 @@ namespace GateSim.Simulations
 {
 	public class Adder
 	{
-		//Refrence Adder.cs for diagram
+		//Refrence Adder.cs for logic gate diagram
 
-		public (bool[], bool[]) Run(bool aInput, bool bInput, bool cInput)
+		/// <summary>
+		/// Adds three binary digits together using logic gates.
+		/// </summary>
+		/// <param name="aInput">The first operand</param>
+		/// <param name="bInput">The second operand</param>
+		/// <param name="cInput">The carry input</param>
+		/// <returns>A pair of bools: (sum, carry)</returns>
+		public (bool, bool) Run(bool aInput, bool bInput, bool cInput)
 		{
 			var BW = 1; //Bitwidth.
 
@@ -47,7 +54,7 @@ namespace GateSim.Simulations
 
 			sim.SettleState();
 
-			return (outputS, outputCout);
+			return (outputS[0], outputCout[0]);
 		}
 
 	}

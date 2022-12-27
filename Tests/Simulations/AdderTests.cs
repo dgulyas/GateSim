@@ -18,8 +18,8 @@ namespace Tests.Simulations
 		{
 			var adder = new Adder();
 			var (sOutput, cOutput) = adder.Run(aInput, bInput, cInput);
-			Assert.AreEqual(sOutputExpected, sOutput[0]);
-			Assert.AreEqual(cOutputExpected, cOutput[0]);
+			Assert.AreEqual(sOutputExpected, sOutput);
+			Assert.AreEqual(cOutputExpected, cOutput);
 		}
 
 	}
