@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using GateSim.Wiring;
+﻿using GateSim.Wiring;
 
 namespace GateSim
 {
+	//How to use a Sim:
+	//1: Create all the devices you need using CreateDevice().
+	//2: Connect the outputs and inputs of those devices using Connect().
+	//   You can use or ignore the Wire that connect returns. Ideally ignore it.
+	//3: Repeatedly call SettleState() to have the sim reach the next stable state
+	//   where every change has propogated through the system.
 	public class Sim
 	{
 		private readonly Dictionary<bool[], Wire> m_wires = new Dictionary<bool[], Wire>();
 		private readonly List<IDevice> m_devices = new List<IDevice>();
 
-		public Wire Connect(bool[] feederArray, bool[] eaterArray)
+		//If a wire doesn't exist with it's input as feederArray, create it
+		//Add the eaterArray as an output for the wire.
+		//Ensure the wire is in the simulation's collection of wires.
+		public Wire Connect(bool[] feederArray, params bool[][] eaterArrays)
 		{
-			if (m_wires.ContainsKey(feederArray))
-			{
-				m_wires[feederArray].AddOutput(eaterArray);
-				return m_wires[feederArray];
-			}
-			else
-			{
-				var wire = new Wire(feederArray, eaterArray);
+			if(!m_wires.ContainsKey(feederArray)){
+				var wire = new Wire(feederArray);
 				m_wires.Add(feederArray, wire);
-				return wire;
 			}
+
+			foreach(var eaterArray in eaterArrays){
+				m_wires[feederArray].AddOutput(eaterArray);
+			}
+
+			return m_wires[feederArray];
 		}
 
 		public T CreateDevice<T>(T device) where T : IDevice
@@ -48,17 +54,14 @@ namespace GateSim
 
 				foreach (var device in m_devices)
 				{
-					if (device.Tick())
-					{
-						somethingChanged = true;
-					}
+					somethingChanged |= device.Tick();
 				}
 
 				numCycles++;
 			}
 
-			if (numCycles >= 1000)
-			{ //It might have settled on the 1000th cycle
+			if (numCycles >= 1000 || somethingChanged)
+			{ //I think this 'if' is correct?
 				throw new Exception("State isn't settling");
 			}
 		}
