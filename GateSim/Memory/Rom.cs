@@ -17,9 +17,9 @@ namespace GateSim.Memory
         */
         public Rom(int dataBitWidth, int addressBitWidth)
         {
-            Input = new bool[addressBitWidth];
+            Input = new bool[dataBitWidth];
             Output = new bool[dataBitWidth];
-            Contents = new bool[dataBitWidth][];
+            Contents = new bool[(int)Math.Pow(2, addressBitWidth)][];
         }
 
         public void Set(int address, bool[] data){

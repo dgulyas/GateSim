@@ -16,7 +16,7 @@ namespace GateSim.Simulations
 		/// <returns>A pair of bools: (sum, carry)</returns>
 		public (bool, bool) Run(bool aInput, bool bInput, bool cInput)
 		{
-			var BW = 1; //Bitwidth.
+			var BW = 1; //Bitwidth
 
 			var sim = new Sim();
 
