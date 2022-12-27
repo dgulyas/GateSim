@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GateSim\GateSim2.csproj" />
+    <ProjectReference Include="..\GateSim\GateSim.csproj" />
   </ItemGroup>
 
 </Project>
