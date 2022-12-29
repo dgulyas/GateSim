@@ -28,7 +28,7 @@ namespace GateSim.Memory
 				}
 				else
 				{
-					//This isn't an efficent way to do this, but it's simple.
+					//This isn't an efficient way to do this, but it's simple.
 					var incrementedArray = (Output.ToInt() + 1).ToBoolArray(Output.Length);
 					Util.SetArrayToValues(Output, incrementedArray);
 				}

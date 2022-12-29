@@ -72,8 +72,8 @@ namespace GateSim.Wiring
 			return m_outputs[index];
 		}
 
-		//All the objects in this class's mapping shouldn't be refrenced by other
-		//objects, so we create an entirely new mapping using the primatives in the passed
+		//All the objects in this class's mapping shouldn't be referenced by other
+		//objects, so we create an entirely new mapping using the primitives in the passed
 		//in mapping
 		private Dictionary<int, Tuple<int, int>> DeepCopyMapping(Dictionary<int, Tuple<int, int>> mapping)
 		{
