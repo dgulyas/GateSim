@@ -17,7 +17,7 @@ namespace GateSim.Memory
         */
         public Rom(int dataBitWidth, int addressBitWidth)
         {
-            Input = new bool[dataBitWidth];
+            Input = new bool[addressBitWidth];
             Output = new bool[dataBitWidth];
             Contents = new bool[(int)Math.Pow(2, addressBitWidth)][];
         }
@@ -45,8 +45,16 @@ namespace GateSim.Memory
             return !oldState.SequenceEqual(Output);
         }
 
-        //TODO: Add ability to load from and dump to a file on disk.
-        //Then we can write programs and load them :P
+        /// <summary>
+        /// Loads an integer array into the Rom.
+        /// Length of array or Rom doesn't matter.
+        /// </summary>
+        /// <param name="data"></param>
+        public void LoadFromArray(int[] data){
+            for(int i = 0; i < data.Length && i < Contents.Length; i++){
+                Contents[i] = data[i].ToBoolArray(Output.Length);
+            }
+        }
 
     }
 }
