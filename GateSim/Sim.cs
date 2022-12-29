@@ -7,7 +7,7 @@ namespace GateSim
 	//2: Connect the outputs and inputs of those devices using Connect().
 	//   You can use or ignore the Wire that connect returns. Ideally ignore it.
 	//3: Repeatedly call SettleState() to have the sim reach the next stable state
-	//   where every change has propogated through the system.
+	//   where every change has propagated through the system.
 	public class Sim
 	{
 		private readonly Dictionary<bool[], Wire> m_wires = new Dictionary<bool[], Wire>();
@@ -37,7 +37,7 @@ namespace GateSim
 		}
 
 		//The state is "settled" when none of the outputs change.
-		//That means everything should have propogated through the system.
+		//That means everything should have propagated through the system.
 		public void SettleState()
 		{
 			var somethingChanged = true;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Json;
 
 namespace GateSim
 {
@@ -53,6 +54,20 @@ namespace GateSim
 			{
 				array[i] = values[i];
 			}
+		}
+
+		public static void WriteArrayToFile(string filePath, int[] array){
+			var jsonString = JsonSerializer.Serialize(array);
+			File.WriteAllText(filePath, jsonString);
+		}
+
+		public static int[] ReadArrayFromFile(string filePath){
+			var jsonString = File.ReadAllText(filePath);
+			var array = JsonSerializer.Deserialize<int[]>(jsonString);
+			if(array == null){
+				throw new Exception($"Problem deserializing int array in {filePath}");
+			}
+			return array;
 		}
 
 	}
