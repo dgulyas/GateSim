@@ -20,6 +20,12 @@ namespace GateSim
 			return workingTotal;
 		}
 
+		public static void Invert(this bool[] array){
+			for(int i = 0; i < array.Length; i++){
+				array[i] = !array[i];
+			}
+		}
+
 		public static bool[] ToBoolArray(this int num, int bitWidth)
 		{
 			return Convert.ToString(num, 2).PadLeft(bitWidth).Reverse().Select(s => s.Equals('1')).ToArray();

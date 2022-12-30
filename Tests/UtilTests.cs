@@ -19,5 +19,16 @@ namespace Tests
             CollectionAssert.AreEqual(array, deserializedArray);
         }
 
+        [TestMethod]
+        public void InvertArrayWorks(){
+            var a = new bool[]{true};
+            a.Invert();
+            CollectionAssert.AreEqual(a, new bool[]{false});
+
+            a = new bool[]{false, true, false};
+            a.Invert();
+            CollectionAssert.AreEqual(a, new bool[]{true, false, true});
+        }
+
     }
 }
