@@ -12,7 +12,7 @@ namespace Tests.Arithmetic
         [DataRow(123, 123, 246, 0)]
         [DataRow(255, 1, 0, 1)]
         [DataRow(255, 255, 254, 1)]
-        public void AdderDoesThing(int a, int b, int sum, int carryOut){
+        public void AdderWorksCorrectly(int a, int b, int sum, int carryOut){
             var bitWidth = 8;
             var adder = new Adder(bitWidth);
             Util.SetArrayToValues(adder.Input1, a.ToBoolArray(bitWidth));
