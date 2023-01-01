@@ -13,39 +13,15 @@ namespace GateSim.Arithmetic
             Util.SetArrayToValues(Output, Input);
             if(Output[Output.Length-1] == false){ //currently positive
                 Output.Invert();
-                AddOne(Output);
+                Output.AddOne();
             }
             else //currently negative
             {
-                MinusOne(Output);
+                Output.MinusOne();
                 Output.Invert();
             }
 
             return !oldState.SequenceEqual(Output);
-        }
-
-        public static void AddOne(bool[] a){
-            for(int i = 0; i < a.Length; i++){
-                if(a[i] == false){
-                    a[i] = true;
-                    break;
-                }
-                else{
-                    a[i] = false;
-                }
-            }
-        }
-
-        public static void MinusOne(bool[] a){
-            for(int i = 0; i < a.Length; i++){
-                if(a[i] == false){
-                    a[i] = true;
-                }
-                else{
-                    a[i] = false;
-                    break;
-                }
-            }
         }
 
         public Negator(int bitwidth){
