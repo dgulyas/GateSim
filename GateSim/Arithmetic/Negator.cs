@@ -24,6 +24,11 @@ namespace GateSim.Arithmetic
             return !oldState.SequenceEqual(Output);
         }
 
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+
         public Negator(int bitwidth){
             Input = new bool[bitwidth];
             Output = new bool[bitwidth];

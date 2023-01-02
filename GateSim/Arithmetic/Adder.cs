@@ -44,6 +44,11 @@ namespace GateSim.Arithmetic
             return !oldState.SequenceEqual(Output);
         }
 
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+
         public Adder(int bitWidth){
             Input1 = new bool[bitWidth];
             Input2 = new bool[bitWidth];

@@ -23,5 +23,9 @@ namespace GateSim.InputOutput
             Output[0] = !Output[0];
         }
 
-	}
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

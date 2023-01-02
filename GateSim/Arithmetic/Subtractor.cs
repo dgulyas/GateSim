@@ -24,6 +24,11 @@ namespace GateSim.Arithmetic
             return !oldState.SequenceEqual(Output);
         }
 
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+
         public Subtractor(int bitWidth){
             negator = new Negator(bitWidth);
             adder = new Adder(bitWidth);

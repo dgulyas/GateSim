@@ -50,5 +50,9 @@ namespace GateSim.Plexers
 			m_outputs[selectedOutput][0] = true;
 		}
 
-	}
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

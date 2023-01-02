@@ -43,5 +43,9 @@ namespace GateSim.Gates
 			return input;
 		}
 
-	}
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

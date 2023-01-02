@@ -85,5 +85,10 @@ namespace GateSim.Wiring
 
 			return newMapping;
 		}
-	}
+
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

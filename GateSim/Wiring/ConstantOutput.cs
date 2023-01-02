@@ -43,5 +43,9 @@ namespace GateSim.Wiring
 			Output[bitNum] = newValue;
 		}
 
-	}
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -21,7 +21,12 @@ namespace GateSim.Gates
 			return !oldState.SequenceEqual(Output);
 		}
 
-		public NotGate(int bitWidth)
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public NotGate(int bitWidth)
 		{
 			m_bitWidth = bitWidth;
 			Input = new bool[bitWidth];

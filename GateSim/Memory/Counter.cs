@@ -38,7 +38,12 @@ namespace GateSim.Memory
 			return !oldState.SequenceEqual(Output);
 		}
 
-		public Counter(int bitWidth)
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Counter(int bitWidth)
 		{
 			Output = new bool[bitWidth];
 			Input = new bool[bitWidth];

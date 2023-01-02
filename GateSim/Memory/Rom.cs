@@ -56,5 +56,9 @@ namespace GateSim.Memory
             }
         }
 
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

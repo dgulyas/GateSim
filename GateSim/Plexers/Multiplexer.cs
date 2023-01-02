@@ -47,5 +47,9 @@ namespace GateSim.Plexers
 			return m_inputs[index];
 		}
 
-	}
+        public string GetStateString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
