@@ -18,13 +18,13 @@ namespace GateSim.Wiring
 			m_input = input;
 		}
 
-		public Wire(bool[] input, bool[] output)
+		public Wire(bool[] wireInput, bool[] wireOutput)
 		{
-			BitWidth = input.Length;
+			BitWidth = wireInput.Length;
 			m_input = new bool[BitWidth];
-			m_input = input;
+			m_input = wireInput;
 
-			AddOutput(output);
+			AddOutput(wireOutput);
 		}
 
 		public void AddOutput(bool[] output)
