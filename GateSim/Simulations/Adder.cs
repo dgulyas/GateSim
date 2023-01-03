@@ -3,9 +3,9 @@ using GateSim.Wiring;
 
 namespace GateSim.Simulations
 {
-	public class Adder
+	public class AdderSim
 	{
-		//Refrence Adder.cs for logic gate diagram
+		//Reference Adder.cs for logic gate diagram
 
 		/// <summary>
 		/// Adds three binary digits together using logic gates.
@@ -20,15 +20,15 @@ namespace GateSim.Simulations
 
 			var sim = new Sim();
 
-			var inputA = sim.CreateDevice(new ConstantOutput(BW, aInput));
-			var inputB = sim.CreateDevice(new ConstantOutput(BW, bInput));
-			var inputCin = sim.CreateDevice(new ConstantOutput(BW, cInput));
+			var inputA = sim.AddDevice(new ConstantOutput(BW, aInput));
+			var inputB = sim.AddDevice(new ConstantOutput(BW, bInput));
+			var inputCin = sim.AddDevice(new ConstantOutput(BW, cInput));
 
-			var xor1 = sim.CreateDevice(new XorGate(BW));
-			var xor2 = sim.CreateDevice(new XorGate(BW));
-			var and1 = sim.CreateDevice(new AndGate(BW));
-			var and2 = sim.CreateDevice(new AndGate(BW));
-			var or1 = sim.CreateDevice(new OrGate(BW));
+			var xor1 = sim.AddDevice(new XorGate(BW));
+			var xor2 = sim.AddDevice(new XorGate(BW));
+			var and1 = sim.AddDevice(new AndGate(BW));
+			var and2 = sim.AddDevice(new AndGate(BW));
+			var or1 = sim.AddDevice(new OrGate(BW));
 
 			var outputS = xor2.Output;
 			var outputCout = or1.Output;

@@ -16,7 +16,7 @@ namespace Tests.Simulations
 		[DataRow(true, true, true, true, true)]
 		public void AdderTest(bool aInput, bool bInput, bool cInput, bool sOutputExpected, bool cOutputExpected)
 		{
-			var adder = new Adder();
+			var adder = new AdderSim();
 			var (sOutput, cOutput) = adder.Run(aInput, bInput, cInput);
 			Assert.AreEqual(sOutputExpected, sOutput);
 			Assert.AreEqual(cOutputExpected, cOutput);
