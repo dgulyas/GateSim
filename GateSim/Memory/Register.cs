@@ -33,7 +33,7 @@ namespace GateSim.Memory
 
         public string GetStateString()
         {
-            throw new NotImplementedException();
+            return Output.ToInt().ToString();
         }
 
         public Register(int bitWidth)
