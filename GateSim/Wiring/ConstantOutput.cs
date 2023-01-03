@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace GateSim.Wiring
+﻿namespace GateSim.Wiring
 {
 	public class ConstantOutput : IDevice
 	{
@@ -21,21 +18,7 @@ namespace GateSim.Wiring
 		public ConstantOutput(bool[] startingValue)
 		{
 			Output = new bool[startingValue.Length];
-			SetOutputDeep(startingValue);
-		}
-
-		//Deep copy the values in newOutput into Output.
-		public void SetOutputDeep(bool[] newOutput)
-		{
-			if (newOutput.Length != Output.Length)
-			{
-				throw new Exception("newOutput is the wrong width");
-			}
-
-			for (int i = 0; i < Output.Length; i++)
-			{
-				Output[i] = newOutput[i];
-			}
+			Util.SetArrayToValues(Output, startingValue);
 		}
 
 		public void SetSpecificBit(int bitNum, bool newValue)
@@ -45,7 +28,7 @@ namespace GateSim.Wiring
 
         public string GetStateString()
         {
-            throw new NotImplementedException();
+            return Output.ToInt().ToString() + ":" + Util.ArrayToString(Output);
         }
     }
 }
