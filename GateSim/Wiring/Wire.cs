@@ -3,6 +3,15 @@ using System.Collections.Generic;
 
 namespace GateSim.Wiring
 {
+	/// <summary>
+	/// Wires are really just devices that when they Tick, copy their
+	/// input to their outputs without changing it. However, for a simulation
+	/// to be deterministic, all the actual devices need to tick before
+	/// any wires. (For example, if a device ticks after the wire that's
+	/// connected to it's output, the wire won't move the new output along
+	/// until the next "round".) Wire doesn't implement IDevice in order
+	/// to enforce this.
+	/// </summary>
 	public class Wire
 	{
 		public int BitWidth { get; }
