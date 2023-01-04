@@ -1,19 +1,20 @@
 using GateSim.Arithmetic;
 using GateSim.Memory;
 using GateSim.Plexers;
+using GateSim.Wiring;
 
 namespace GateSim.Simulations
 {
     public class Cpu01
     {
         public const int BitWidth = 8;
-        public Dictionary<string, IDevice> Displayables = new Dictionary<string, IDevice>();
         private Sim sim = new Sim();
 
         public bool[] RegSelect;
         public bool[] Arg1Select;
         public bool[] Arg2Select;
         public bool[] FuncSelect;
+        public bool[] Literal;
 
         public Cpu01()
         {
@@ -31,6 +32,7 @@ namespace GateSim.Simulations
             var adder = sim.AddDevice(new Adder(BitWidth), "adder");
             var subtractor = sim.AddDevice(new Subtractor(BitWidth), "subtractor");
             var negator = sim.AddDevice(new Negator(BitWidth), "negator");
+            var literal = sim.AddDevice(new ConstantOutput(BitWidth), "literal");
 
             sim.Connect(deco1.GetOutput(0), r0.Enable);
             sim.Connect(deco1.GetOutput(1), r1.Enable);
@@ -48,6 +50,7 @@ namespace GateSim.Simulations
             sim.Connect(adder.Output, mux3.GetInput(0));
             sim.Connect(subtractor.Output, mux3.GetInput(1));
             sim.Connect(negator.Output, mux3.GetInput(2));
+            sim.Connect(literal.Output, mux3.GetInput(3));
 
             sim.Connect(mux3.Output, r0.Input, r1.Input, r2.Input, r3.Input);
 
@@ -55,6 +58,7 @@ namespace GateSim.Simulations
             Arg1Select = mux1.InputSelect;
             Arg2Select = mux2.InputSelect;
             FuncSelect = mux3.InputSelect;
+            Literal = literal.Output;
         }
 
         public void SettleState()
