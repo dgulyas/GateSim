@@ -1,11 +1,13 @@
 namespace GateSim.InputOutput
 {
+	//TODO: Should this have an input that holds the new value
+	//and then tick copies it to output?
 	public class Switch : IDevice
 	{
 		public bool[] Output { get; }
 		public int Id { get; set; }
 
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			return false;
 		}

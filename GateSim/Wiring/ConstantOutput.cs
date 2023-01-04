@@ -5,9 +5,14 @@
 		public bool[] Output { get; }
 		public int Id { get; set; }
 
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			return false;
+		}
+
+		public ConstantOutput(int bitWidth)
+		{
+			Output = new bool[bitWidth];
 		}
 
 		public ConstantOutput(int bitWidth, bool constantValue)

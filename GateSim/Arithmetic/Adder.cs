@@ -9,7 +9,7 @@ namespace GateSim.Arithmetic
         public bool[] Output { get; }
         public int Id { get; set; }
 
-        public bool Tick(){
+        public bool Tick(bool printDebug = false){
             var oldState = (bool[]) Output.Clone();
 
             var sumArray = new bool[Input1.Length];

@@ -8,7 +8,7 @@ namespace GateSim.Plexers
 		private readonly bool[][] m_outputs;
 		public int Id { get; set; }
 
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			var selectedOutputIndex = OutputSelect.ToInt();
 			var outputChanging = !m_outputs[selectedOutputIndex][0]; //If the selected output isn't true, it needs to change

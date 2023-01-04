@@ -21,7 +21,7 @@ namespace GateSim
 		private readonly Dictionary<string, IDevice> m_devicesById = new Dictionary<string, IDevice>();
 
 		//If a wire doesn't exist with it's input as deviceOutput, create it
-		//Add the deviceInput as an output for the wire.
+		//Add the deviceInputs as outputs for the wire.
 		//Ensure the wire is in the simulation's collection of wires.
 		public Wire Connect(bool[] deviceOutput, params bool[][] deviceInputs)
 		{

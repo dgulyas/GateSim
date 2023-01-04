@@ -13,7 +13,7 @@ namespace GateSim.Memory
 		private bool[] m_clockAtPreviousTick;
 
 		public int Id { get; set; }
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			var oldState = (bool[])Output.Clone();
 			if (Clear[0])

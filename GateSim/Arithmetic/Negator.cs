@@ -6,7 +6,7 @@ namespace GateSim.Arithmetic
         public bool[] Output;
         public int Id { get; set; }
 
-        public bool Tick()
+        public bool Tick(bool printDebug = false)
         {
             var oldState = (bool[]) Output.Clone();
 

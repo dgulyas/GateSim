@@ -13,7 +13,7 @@ namespace GateSim.InputOutput
 
 
 		public int Id { get; set; }
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			if (Enable[0] && !m_clockAtPreviousTick[0] && Clock[0]) //if the clock has a rising edge
 			{

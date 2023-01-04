@@ -17,7 +17,7 @@ namespace GateSim.Wiring
 		private Dictionary<int, Tuple<int, int>> m_mapping;
 
 		public int Id { get; set; }
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			var outputsChanged = false;
 			foreach (var key in m_mapping.Keys)

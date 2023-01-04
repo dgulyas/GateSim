@@ -14,7 +14,7 @@ namespace GateSim.Arithmetic
         private Wire wire;
         private Negator negator;
 
-        public bool Tick(){
+        public bool Tick(bool printDebug = false){
             var oldState = (bool[]) Output.Clone();
 
             negator.Tick();

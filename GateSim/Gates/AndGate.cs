@@ -9,7 +9,7 @@ namespace GateSim.Gates
 		public bool[] Output { get; }
 		public int Id { get; set; }
 
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			var oldState = (bool[]) Output.Clone();
 			for(int i = 0; i < Output.Length; i++)

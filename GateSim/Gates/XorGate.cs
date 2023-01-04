@@ -11,7 +11,7 @@ namespace GateSim.Gates
 
 		private readonly int m_bitWidth;
 
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			//xor is true if there's an odd number of true inputs
 			var oldState = (bool[])Output.Clone();

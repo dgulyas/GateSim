@@ -12,7 +12,7 @@ namespace GateSim
 		//iterating over the devices, since more iterations won't change anything.
 		//It's possible for stable state to never be never reached.
 		//ex. A negator feeds into itself
-		bool Tick();
+		bool Tick(bool printDebug = false);
 
 		string GetStateString();
 

@@ -10,7 +10,7 @@ namespace GateSim.Gates
 
 		private readonly int m_bitWidth;
 
-		public bool Tick()
+		public bool Tick(bool printDebug = false)
 		{
 			var oldState = (bool[])Output.Clone();
 			for (int i = 0; i < m_bitWidth; i++)
