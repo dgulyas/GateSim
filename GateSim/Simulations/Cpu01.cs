@@ -1,4 +1,5 @@
 using GateSim.Arithmetic;
+using GateSim.InputOutput;
 using GateSim.Memory;
 using GateSim.Plexers;
 using GateSim.Wiring;
@@ -15,6 +16,7 @@ namespace GateSim.Simulations
         public bool[] Arg2Select;
         public bool[] FuncSelect;
         public bool[] Literal;
+        public bool[] Clock;
 
         public Cpu01()
         {
@@ -33,6 +35,8 @@ namespace GateSim.Simulations
             var subtractor = sim.AddDevice(new Subtractor(BitWidth), "subtractor");
             var negator = sim.AddDevice(new Negator(BitWidth), "negator");
             var literal = sim.AddDevice(new ConstantOutput(BitWidth), "literal");
+
+            var clk = sim.AddDevice(new Switch(), "clk");
 
             sim.Connect(deco1.GetOutput(0), r0.Enable);
             sim.Connect(deco1.GetOutput(1), r1.Enable);
@@ -54,11 +58,14 @@ namespace GateSim.Simulations
 
             sim.Connect(mux3.Output, r0.Input, r1.Input, r2.Input, r3.Input);
 
+            sim.Connect(clk.Output, r0.Clock, r1.Clock, r2.Clock, r3.Clock);
+
             RegSelect = deco1.OutputSelect;
             Arg1Select = mux1.InputSelect;
             Arg2Select = mux2.InputSelect;
             FuncSelect = mux3.InputSelect;
             Literal = literal.Output;
+            Clock = clk.Output;
         }
 
         public void SettleState()

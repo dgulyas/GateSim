@@ -1,5 +1,6 @@
 using GateSim;
 using GateSim.Simulations;
+using GateSim.Memory;
 
 namespace Tests.Simulations
 {
@@ -18,16 +19,18 @@ namespace Tests.Simulations
             opSelect.Add("lit", 3);
 
             cpu = new Cpu01();
+            cpu.Clock[0] = false;
         }
 
         [TestMethod]
         public void ExampleRun1()
         {
-            ExecuteOperation("lit", 0, 0, 0, 15);
-            ExecuteOperation("lit", 0, 0, 1, 20);
-            ExecuteOperation("add", 0, 1, 2, 0);
+            ExecuteOperation("lit", 0, 0, 0, 15); //load 15 into r0
+            ExecuteOperation("lit", 0, 0, 1, 20); //load 10 into r1
+            ExecuteOperation("add", 0, 1, 2, 0); //add r0 and r1 and store in r2
 
-            var thing = cpu.GetDevice("r2");
+            var r2 = (Register)(cpu.GetDevice("r2"));
+            Assert.AreEqual(35, r2.Output.ToInt());
         }
 
         /// <summary>
@@ -46,6 +49,9 @@ namespace Tests.Simulations
             Util.SetArrayToValues(cpu.RegSelect, rd.ToBoolArray(2));
             Util.SetArrayToValues(cpu.Literal, lit.ToBoolArray(8));
 
+            cpu.Clock[0] = false;
+            cpu.SettleState();
+            cpu.Clock[0] = true;
             cpu.SettleState();
         }
 
