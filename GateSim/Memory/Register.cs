@@ -31,12 +31,12 @@ namespace GateSim.Memory
 			return !oldState.SequenceEqual(Output);
 		}
 
-        public string GetStateString()
-        {
-            return Output.ToInt().ToString();
-        }
+		public string GetStateString()
+		{
+			return Output.ToInt().ToString();
+		}
 
-        public Register(int bitWidth)
+		public Register(int bitWidth)
 		{
 			Input = new bool[bitWidth];
 			Output = new bool[bitWidth];

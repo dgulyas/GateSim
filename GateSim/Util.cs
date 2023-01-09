@@ -27,28 +27,28 @@ namespace GateSim
 		}
 
 		public static void AddOne(this bool[] a){
-            for(int i = 0; i < a.Length; i++){
-                if(a[i] == false){
-                    a[i] = true;
-                    break;
-                }
-                else{
-                    a[i] = false;
-                }
-            }
-        }
+			for(int i = 0; i < a.Length; i++){
+				if(a[i] == false){
+					a[i] = true;
+					break;
+				}
+				else{
+					a[i] = false;
+				}
+			}
+		}
 
 		public static void MinusOne(this bool[] a){
-            for(int i = 0; i < a.Length; i++){
-                if(a[i] == false){
-                    a[i] = true;
-                }
-                else{
-                    a[i] = false;
-                    break;
-                }
-            }
-        }
+			for(int i = 0; i < a.Length; i++){
+				if(a[i] == false){
+					a[i] = true;
+				}
+				else{
+					a[i] = false;
+					break;
+				}
+			}
+		}
 
 		public static bool[] ToBoolArray(this int num, int bitWidth)
 		{

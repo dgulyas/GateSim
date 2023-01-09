@@ -7,13 +7,13 @@ using GateSim.Simulations;
 
 namespace Terminal
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var sim = new Cpu01();
-            //var simState =
-        }
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			var sim = new Cpu01();
+			//var simState =
+		}
 
-    }
+	}
 }

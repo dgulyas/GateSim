@@ -23,13 +23,13 @@ namespace GateSim.InputOutput
 			return false;
 		}
 
-        public string GetStateString()
-        {
-            throw new NotImplementedException();
-        }
+		public string GetStateString()
+		{
+			throw new NotImplementedException();
+		}
 
-        //We have two constructors so we can override the output method for testing
-        public Tty(int bitWidth) : this(bitWidth, Console.Write) { }
+		//We have two constructors so we can override the output method for testing
+		public Tty(int bitWidth) : this(bitWidth, Console.Write) { }
 
 		public Tty(int bitWidth, Action<char> writeAction)
 		{

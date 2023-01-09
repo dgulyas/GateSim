@@ -17,17 +17,17 @@ namespace GateSim.InputOutput
 			Output = new bool[]{startingValue};
 		}
 
-        public void Set(bool value){
-            Output[0] = value;
-        }
+		public void Set(bool value){
+			Output[0] = value;
+		}
 
-        public void Toggle(){
-            Output[0] = !Output[0];
-        }
+		public void Toggle(){
+			Output[0] = !Output[0];
+		}
 
-        public string GetStateString()
-        {
-            throw new NotImplementedException();
-        }
-    }
+		public string GetStateString()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

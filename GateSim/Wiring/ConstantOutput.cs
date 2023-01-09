@@ -31,9 +31,9 @@
 			Output[bitNum] = newValue;
 		}
 
-        public string GetStateString()
-        {
-            return Output.ToInt().ToString() + ":" + Util.ArrayToString(Output);
-        }
-    }
+		public string GetStateString()
+		{
+			return Output.ToInt().ToString() + ":" + Util.ArrayToString(Output);
+		}
+	}
 }
