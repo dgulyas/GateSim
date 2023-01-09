@@ -5,7 +5,7 @@ using GateSim.Memory;
 namespace Tests.Simulations
 {
 	[TestClass]
-	public class Cpu01Tests
+    public class Cpu01Tests
     {
         Dictionary<string, int> opSelect;
         public Cpu01 cpu;
@@ -43,16 +43,8 @@ namespace Tests.Simulations
         /// <param name="lit">The literal for the load operation</param>
         private void ExecuteOperation(string op, int r1, int r2, int rd, int lit)
         {
-            Util.SetArrayToValues(cpu.FuncSelect, opSelect[op].ToBoolArray(2));
-            Util.SetArrayToValues(cpu.Arg1Select, r1.ToBoolArray(2));
-            Util.SetArrayToValues(cpu.Arg2Select, r2.ToBoolArray(2));
-            Util.SetArrayToValues(cpu.RegSelect, rd.ToBoolArray(2));
-            Util.SetArrayToValues(cpu.Literal, lit.ToBoolArray(8));
-
-            cpu.Clock[0] = false;
-            cpu.SettleState();
-            cpu.Clock[0] = true;
-            cpu.SettleState();
+            cpu.SetInputs(op, r1, r2, rd, lit);
+            cpu.ClockTick();
         }
 
     }
