@@ -36,7 +36,9 @@ namespace GateSim.Simulations
 
         public Cpu02()
         {
-            var deco1 = sim.AddDevice(new Decoder(3), "deco1");
+            //Step 1: Create devices.
+
+            var deco_regSelect = sim.AddDevice(new Decoder(3), "deco1");
 
             var registers = new Register[8];
             for(int i = 0; i < registers.Length - 1; i++)
@@ -48,6 +50,7 @@ namespace GateSim.Simulations
             var mux_arg1 = sim.AddDevice(new Multiplexer(BitWidth, 3), "mux_arg1");
             var mux_arg2 = sim.AddDevice(new Multiplexer(BitWidth, 3), "mux_arg2");
             var mux_litOrAlu = sim.AddDevice(new Multiplexer(BitWidth, 1), "mux_litOrAlu");
+            var mux_aluOpSelect = sim.AddDevice(new Multiplexer(BitWidth, 2), "mux_aluOpSelect");
 
             var adder = sim.AddDevice(new Adder(BitWidth), "adder");
             var subtractor = sim.AddDevice(new Subtractor(BitWidth), "subtractor");
@@ -71,6 +74,45 @@ namespace GateSim.Simulations
             var splitter = sim.AddDevice(new Splitter(20, splitterRanges), "splitter");
 
             Clock = clk.Output;
+
+            //Step 2: Set up wiring connecting device outputs to device inputs.
+
+            for(int i = 0; i < registers.Length; i++)
+            {
+                //Hook up register write select
+                sim.Connect(deco_regSelect.GetOutput(i), registers[i].Enable);
+
+                //Hook up register data inputs
+                sim.Connect(mux_litOrAlu.Output, registers[i].Input);
+
+                //Hook up register data outputs to argument mux's
+                sim.Connect(registers[i].Output, mux_arg1.GetInput(i), mux_arg2.GetInput(i));
+            }
+
+            //Hook up the argument mux's to the inputs for the function devices
+            sim.Connect(mux_arg1.Output, adder.Input1, subtractor.Input1, negator.Input);
+            sim.Connect(mux_arg2.Output, adder.Input2, subtractor.Input2);
+
+            //Hook the function devices to the mux that decides which function's output is saved
+            sim.Connect(adder.Output, mux_aluOpSelect.GetInput(0));
+            sim.Connect(subtractor.Output, mux_aluOpSelect.GetInput(1));
+            sim.Connect(negator.Output, mux_aluOpSelect.GetInput(2));
+            sim.Connect(literal.Output, mux_aluOpSelect.GetInput(3));
+
+            //Hook up alu output to 'lit or alu' mux
+            sim.Connect(mux_aluOpSelect.Output, mux_litOrAlu.GetInput(1));
+
+            //Hook up instruction splitter to inputs
+            sim.Connect(splitter.GetOutput(0), mux_litOrAlu.InputSelect);
+            sim.Connect(splitter.GetOutput(1), deco_regSelect.OutputSelect);
+            sim.Connect(splitter.GetOutput(2), mux_litOrAlu.GetInput(0));
+            sim.Connect(splitter.GetOutput(3), mux_arg1.InputSelect);
+            sim.Connect(splitter.GetOutput(4), mux_arg2.InputSelect);
+            sim.Connect(splitter.GetOutput(5), mux_aluOpSelect.InputSelect);
+
+            //Hook up instruction splitter input to rom output
+            sim.Connect(rom.Output, splitter.Input);
+
         }
 
         public void SettleState()
