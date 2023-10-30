@@ -29,8 +29,7 @@ namespace Tests.Simulations
 			ExecuteOperation("lit", 0, 0, 1, 20); //load 10 into r1
 			ExecuteOperation("add", 0, 1, 2, 0); //add r0 and r1 and store in r2
 
-			var r2 = (Register)(cpu.GetDevice("r2"));
-			Assert.AreEqual(35, r2.Output.ToInt());
+			Assert.AreEqual(35, GetRegValue("r2"));
 		}
 
 		/// <summary>
@@ -46,6 +45,10 @@ namespace Tests.Simulations
 			cpu.SetInputs(op, r1, r2, rd, lit);
 			cpu.ClockTick();
 		}
+
+        private int GetRegValue(string regName){
+            return ((Register)(cpu.GetDevice("r2"))).Output.ToInt();
+        }
 
 	}
 }

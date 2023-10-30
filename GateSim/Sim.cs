@@ -3,11 +3,16 @@
 namespace GateSim
 {
 	//How to use a Sim:
-	//1: Create all the devices you need using CreateDevice().
+	// Setup:
+	//1: Create all the devices you need using CreateDevice(), and save
+	//	 the refrences to the devices that are returned so you can connect
+	//	 them to each other.
 	//2: Connect the outputs and inputs of those devices using Connect().
-	//   You can use or ignore the Wire that connect returns. Ideally ignore it.
-	//3: Repeatedly call SettleState() to have the sim reach the next stable state
-	//   where every change has propagated through the system.
+	//   You can use or ignore the Wire that Connect returns. Ideally ignore it.
+	// Runtime:
+	//3: Using the devices you saved, modify their inputs.
+	//4: Call SettleState() to have the sim reach the next stable state
+	//   where every change has propagated through the sim.
 	public class Sim
 	{
 		//key is the wire's input array. This lets us see if there's already a wire
@@ -20,7 +25,8 @@ namespace GateSim
 		//Ex. An interface wants to display the state of specific devices.
 		private readonly Dictionary<string, IDevice> m_devicesById = new Dictionary<string, IDevice>();
 
-		//If a wire doesn't exist with it's input as deviceOutput, create it
+		//A device's output is a wire's input and vice versa.
+		//If a wire doesn't exist with it's input as deviceOutput, create it.
 		//Add the deviceInputs as outputs for the wire.
 		//Ensure the wire is in the simulation's collection of wires.
 		public Wire Connect(bool[] deviceOutput, params bool[][] deviceInputs)
@@ -49,6 +55,12 @@ namespace GateSim
 
 		//The state is "settled" when none of the outputs change.
 		//That means everything should have propagated through the system.
+		//Step 1: Copy the every wire's input the that wire's outputs
+		//Step 2: Tick each device now that their inputs might have changed.
+		//Step 3: Repeat the above steps until no device outputs change or
+		//        1000 iterations ahve been done.
+		//Step 4: If it's been more than 1000 iterations, and things are still
+		//        changing, throw an exception.
 		public void SettleState()
 		{
 			var somethingChanged = true;
