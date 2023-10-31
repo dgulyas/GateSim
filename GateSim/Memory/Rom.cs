@@ -50,11 +50,21 @@ namespace GateSim.Memory
 		/// Length of array or Rom doesn't matter.
 		/// </summary>
 		/// <param name="data"></param>
-		public void LoadFromArray(int[] data){
+		public void LoadFromIntArray(int[] data){
 			for(int i = 0; i < data.Length && i < Contents.Length; i++){
 				Contents[i] = data[i].ToBoolArray(Output.Length);
 			}
 		}
+
+		//Each string in the array much have the same number of characters
+		//as the width of data in the rom
+		public void LoadFromStringArray(string[] data)
+		{
+            for (int i = 0; i < data.Length && i < Contents.Length; i++)
+            {
+                Contents[i] = data[i].ToBoolArray();
+            }
+        }
 
 		public string GetStateString()
 		{

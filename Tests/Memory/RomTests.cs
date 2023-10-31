@@ -27,7 +27,7 @@ namespace Tests.Memory
 		[TestMethod]
 		public void LoadFromArrayWorksCorrectly(){
 			var rom = new Rom(3,3);
-			rom.LoadFromArray(new int[]{7,6,5,4,3,2,1,0});
+			rom.LoadFromIntArray(new int[]{7,6,5,4,3,2,1,0});
 
 			CollectionAssert.AreEqual(7.ToBoolArray(3), rom.Contents[0]);
 			CollectionAssert.AreEqual(5.ToBoolArray(3), rom.Contents[2]);
@@ -42,7 +42,7 @@ namespace Tests.Memory
 		public void ChangingAddressChangesOutput(bool[] address, int expectedOutput)
 		{
 			var rom = new Rom(3, 3);
-			rom.LoadFromArray(new int[]{7,6,5,4,3,2,1,0});
+			rom.LoadFromIntArray(new int[]{7,6,5,4,3,2,1,0});
 
 			for(int i = 0; i < address.Length; i++){
 				rom.Input[i] = address[i];

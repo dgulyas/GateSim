@@ -14,10 +14,11 @@ namespace GateSim.Simulations
     //It contains ROM for holding a program and treats the instruction counter
     //as a register so it can be written to.
 
-    internal class Cpu02
+    public class Cpu02
     {
         public const int BitWidth = 8;
         private Sim sim = new Sim();
+        private Rom rom;
 
         //public bool[] RegSelect;
         //public bool[] Arg1Select;
@@ -45,7 +46,8 @@ namespace GateSim.Simulations
             {
                     registers[i] = sim.AddDevice(new Register(BitWidth), "r" + i);
             }
-            var rc = sim.AddDevice(new Counter(BitWidth), "rc");
+            //program counter is treated like a register
+            var r_pc = sim.AddDevice(new Counter(BitWidth), "rc");
 
             var mux_arg1 = sim.AddDevice(new Multiplexer(BitWidth, 3), "mux_arg1");
             var mux_arg2 = sim.AddDevice(new Multiplexer(BitWidth, 3), "mux_arg2");
@@ -59,7 +61,7 @@ namespace GateSim.Simulations
 
             var clk = sim.AddDevice(new Switch(), "clk");
 
-            var rom = sim.AddDevice(new Rom(BitWidth, BitWidth), "rom");
+            rom = sim.AddDevice(new Rom(BitWidth, BitWidth), "rom");
 
             var splitterRanges = new Dictionary<int, Tuple<int, int>>
             {
@@ -87,7 +89,15 @@ namespace GateSim.Simulations
 
                 //Hook up register data outputs to argument mux's
                 sim.Connect(registers[i].Output, mux_arg1.GetInput(i), mux_arg2.GetInput(i));
+
+                //Hook up the clock to each register
+                sim.Connect(clk.Output, registers[i].Clock);
             }
+            //Hook up the program counter
+            sim.Connect(deco_regSelect.GetOutput(7), r_pc.Load);
+            sim.Connect(mux_litOrAlu.Output, r_pc.Input);
+            sim.Connect(r_pc.Output, mux_arg1.GetInput(7), mux_arg2.GetInput(7));
+            sim.Connect(clk.Output, r_pc.Clock);
 
             //Hook up the argument mux's to the inputs for the function devices
             sim.Connect(mux_arg1.Output, adder.Input1, subtractor.Input1, negator.Input);
@@ -112,7 +122,6 @@ namespace GateSim.Simulations
 
             //Hook up instruction splitter input to rom output
             sim.Connect(rom.Output, splitter.Input);
-
         }
 
         public void SettleState()
@@ -131,6 +140,11 @@ namespace GateSim.Simulations
             SettleState();
             Clock[0] = true;
             SettleState();
+        }
+
+        public void LoadProgram(string[] program)
+        {
+            rom.LoadFromStringArray(program);
         }
 
     }

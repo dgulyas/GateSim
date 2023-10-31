@@ -33,7 +33,7 @@
 
 		public string GetStateString()
 		{
-			return Output.ToInt().ToString() + ":" + Util.ArrayToString(Output);
+			return Output.ToInt().ToString() + ":" + Output.ArrayToString();
 		}
 	}
 }

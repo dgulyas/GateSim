@@ -69,5 +69,28 @@ namespace Tests
 			Assert.AreEqual(originalValue, a.ToInt());
 		}
 
-	}
+		//Index of string and array are reversed. This is because when looking
+		//at a string literal containing a number, the highest place value
+		//is on the left, but has an index of 0. In an array, the 0 index
+		//position holds the lowest place value.
+		[TestMethod]
+		public void ArrayToStringWorks()
+		{
+			var array = new bool[] { false, false, true };
+			Assert.AreEqual("100", array.ArrayToString());
+		}
+
+		[TestMethod]
+		public void StringToBoolArrayWorks()
+		{
+			var str = "100";
+			var array = str.ToBoolArray(3);
+
+			//[0,0,1]
+			Assert.AreEqual(array[0], false);
+            Assert.AreEqual(array[1], false);
+            Assert.AreEqual(array[2], true);
+        }
+
+    }
 }

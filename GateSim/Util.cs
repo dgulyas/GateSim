@@ -50,12 +50,13 @@ namespace GateSim
 			}
 		}
 
+		//Convert an interger into a bool[] of a specific width
 		public static bool[] ToBoolArray(this int num, int bitWidth)
 		{
 			return Convert.ToString(num, 2).PadLeft(bitWidth).Reverse().Select(s => s.Equals('1')).ToArray();
 		}
 
-		public static string ArrayToString(bool[] array)
+		public static string ArrayToString(this bool[] array)
 		{
 			var state = "";
 			foreach (var x in array.Reverse())
@@ -64,6 +65,28 @@ namespace GateSim
 			}
 
 			return state;
+		}
+
+		public static bool[] ToBoolArray(this string data)
+		{
+			var array = new bool[data.Length];
+			for(int i = 0; i < array.Length; i++)
+			{
+				var dataIndex = data.Length - i - 1;
+				if (data[dataIndex] == '1')
+				{
+					array[i] = true;
+				}
+				else if (data[dataIndex] == '0')
+				{
+					array[i] = false;
+				}
+				else
+				{
+					throw new Exception("String must only have '0' or '1' in it");
+				}
+			}
+			return array;
 		}
 
 		public static void SetArrayToValue(bool[] array, bool value)
