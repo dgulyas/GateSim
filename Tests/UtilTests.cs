@@ -84,7 +84,7 @@ namespace Tests
 		public void StringToBoolArrayWorks()
 		{
 			var str = "100";
-			var array = str.ToBoolArray(3);
+			var array = str.ToBoolArray();
 
 			//[0,0,1]
 			Assert.AreEqual(array[0], false);

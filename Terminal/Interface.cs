@@ -19,14 +19,16 @@ namespace Terminal
 	public class Interface
 	{
 		private Dictionary<IDevice, Tuple<int, int>> deviceCoords;
-		private Dictionary<string, Tuple<int, int>> stringCoords; //aka labels.
+
+		//Each list item is a string and the coods it will be displayed at.
+		private List<Tuple<string, Tuple<int, int>>> stringCoords; //aka labels.
 		private int m_height;
 		private int m_width;
 		private char[][] buffer;
 
 		public Interface(int height, int width){
 			deviceCoords = new Dictionary<IDevice, Tuple<int, int>>();
-			stringCoords = new Dictionary<string, Tuple<int, int>>();
+			stringCoords = new List<Tuple<string, Tuple<int, int>>>();
 			m_height = height;
 			m_width = width;
 
@@ -51,7 +53,9 @@ namespace Terminal
 				throw new Exception("Coordinates are outside buffer.");
 			}
 
-			stringCoords.Add(str, new Tuple<int, int>(x, y));
+			var newLabl = new Tuple<string, Tuple<int, int>>(str, new Tuple<int, int>(x, y));
+
+			stringCoords.Add(newLabl);
 		}
 
 		public void Refresh(){
@@ -87,10 +91,14 @@ namespace Terminal
 				CopyStringIntoBuffer(stateString, deviceX, deviceY);
 			}
 
-			foreach(var str in stringCoords.Keys)
+			foreach(var lbl in stringCoords)
 			{
-				var strX = stringCoords[str].Item1;
-				var strY = stringCoords[str].Item2;
+				var str = lbl.Item1;
+				var coords = lbl.Item2;
+
+				var strX = coords.Item1;
+				var strY = coords.Item2;
+
 				CopyStringIntoBuffer(str, strX, strY);
 			}
 		}
@@ -104,7 +112,7 @@ namespace Terminal
 						break;
 					}
 
-					buffer[charX][charY] = str[i];
+					buffer[charY][charX] = str[i];
 				}
 		}
 

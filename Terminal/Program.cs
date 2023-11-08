@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GateSim;
-using GateSim.Simulations;
+using Terminal.Simulations;
 
 namespace Terminal
 {
@@ -11,8 +11,8 @@ namespace Terminal
 	{
 		public static void Main(string[] args)
 		{
-			var sim = new Cpu01();
-			//var simState =
+			var cpu = new Cpu01();
+			cpu.ClockTick();
 		}
 
 	}
