@@ -12,8 +12,13 @@ namespace Terminal
 		public static void Main(string[] args)
 		{
 			var cpu = new Cpu01();
-			cpu.ClockTick();
-		}
+
+            while (true)
+            {
+				cpu.ClockTick();
+                Console.ReadLine();
+            }
+        }
 
 	}
 }

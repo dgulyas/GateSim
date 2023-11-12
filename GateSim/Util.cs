@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace GateSim
 {
-	public static class Util
+    public static class Util
 	{
 		public static int ToInt(this bool[] array)
 		{
@@ -50,7 +48,7 @@ namespace GateSim
 			}
 		}
 
-		//Convert an interger into a bool[] of a specific width
+		//Convert an integer into a bool[] of a specific width
 		public static bool[] ToBoolArray(this int num, int bitWidth)
 		{
 			return Convert.ToString(num, 2).PadLeft(bitWidth).Reverse().Select(s => s.Equals('1')).ToArray();

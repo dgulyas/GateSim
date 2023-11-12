@@ -75,7 +75,7 @@ namespace Terminal
 			ioCords.Add(io, new Tuple<int, int>(x, y));
         }
 
-		public string[] Refresh(){
+		public string[] RefreshScreen(){
 			ClearBuffer();
 			FillBuffer();
 
