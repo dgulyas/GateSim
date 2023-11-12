@@ -10,7 +10,7 @@ using GateSim.Wiring;
 
 namespace GateSim.Simulations
 {
-    //This will be iplementing the CPU shown in GateSim\Diagrams\CPU-D.png
+    //This will be implementing the CPU shown in GateSim\Diagrams\CPU-D.png
     //It contains ROM for holding a program and treats the instruction counter
     //as a register so it can be written to.
 
