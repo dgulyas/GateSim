@@ -1,34 +1,41 @@
 using GateSim;
-using System.Collections.Generic;
 
 namespace Terminal
 {
-	/// <summary>
-	/// This class maintains a region of terminal screen space.
-	/// IDevices are registered at certain locations with AddDevice().
-	/// Calling GetCurrentState() returns the state of all registered
-	/// devices arranged at their coordinates. It's returned as a string[]
-	/// which lets it be easily written to the terminal.
-	///
-	/// The intent is that a Simulation is created with all relevant devices
-	/// added to an Interface instance. After every simulation tick, the current
-	/// state is printed to the terminal, and the user can check it, or in the future,
-	/// alter the inputs via terminal command, which will let the simulations
-	/// be interactive.
-	/// </summary>
-	public class Interface
+    /// <summary>
+    /// This class maintains a region of terminal screen space.
+    /// IDevices are registered at certain locations with AddDevice().
+    /// Calling GetCurrentState() returns the state of all registered
+    /// devices arranged at their coordinates. It's returned as a string[]
+    /// which lets it be easily written to the terminal.
+    ///
+    /// The intent is that a Simulation is created with all relevant devices
+    /// added to an Interface instance. After every simulation tick, the current
+    /// state is printed to the terminal, and the user can check it, or in the future,
+    /// alter the inputs via terminal command, which will let the simulations
+    /// be interactive.
+    /// </summary>
+    public class Interface
 	{
+		//Each device can return a string[] containing it's state.
+		//Each frame The dictionary is iterated through, getting the device's state and
+		//displaying it at the tuple coordinates.
 		private Dictionary<IDevice, Tuple<int, int>> deviceCoords;
 
-		//Each list item is a string and the coods it will be displayed at.
+		//Each list item is a string and the coordinates it will be displayed at.
 		private List<Tuple<string, Tuple<int, int>>> stringCoords; //aka labels.
 		private int m_height;
 		private int m_width;
 		private char[][] buffer;
 
+		//A group of input and output arrays, and the coordinates they'll be displayed at.
+		//This makes it easy to display a devices inputs and outputs.
+        private Dictionary<bool[], Tuple<int, int>> ioCords;
+
 		public Interface(int height, int width){
 			deviceCoords = new Dictionary<IDevice, Tuple<int, int>>();
-			stringCoords = new List<Tuple<string, Tuple<int, int>>>();
+			stringCoords = new List<Tuple<string, Tuple<int, int>>>(); 
+            ioCords = new Dictionary<bool[], Tuple<int, int>>();
 			m_height = height;
 			m_width = width;
 
@@ -53,55 +60,61 @@ namespace Terminal
 				throw new Exception("Coordinates are outside buffer.");
 			}
 
-			var newLabl = new Tuple<string, Tuple<int, int>>(str, new Tuple<int, int>(x, y));
+			var newLabel = new Tuple<string, Tuple<int, int>>(str, new Tuple<int, int>(x, y));
 
-			stringCoords.Add(newLabl);
+			stringCoords.Add(newLabel);
 		}
 
-		public void Refresh(){
+        public void AddIO(bool[] io, int x, int y)
+        {
+            if (!ContainsCoords(x, y))
+            {
+                throw new Exception("Coordinates are outside buffer.");
+            }
+
+			ioCords.Add(io, new Tuple<int, int>(x, y));
+        }
+
+		public string[] Refresh(){
 			ClearBuffer();
 			FillBuffer();
-		}
 
-		public string[] GetBufferState()
-		{
-			var strings = new string[buffer.Length];
+            var strings = new string[buffer.Length];
 
-			for(int i = 0; i < buffer.Length; i++){
-				strings[i] = new string(buffer[i]);
-			}
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                strings[i] = new string(buffer[i]);
+            }
 
-			return strings;
-		}
-
-		public string[] GetCurrentState(){
-			Refresh();
-			return GetBufferState();
-		}
+            return strings;
+        }
 
 		private void FillBuffer(){
-			//Copies the device states and strings into the buffer.
+			//Copies the device states, and strings, ect into the buffer.
 
-			foreach(var device in deviceCoords.Keys)
+			foreach(var deviceCoord in deviceCoords)
 			{
-				var deviceX = deviceCoords[device].Item1;
-				var deviceY = deviceCoords[device].Item2;
-				var stateString = device.GetStateString();
-
-				CopyStringIntoBuffer(stateString, deviceX, deviceY);
+				WriteStringToCoord(deviceCoord.Key.GetStateString(), deviceCoord.Value);
 			}
 
 			foreach(var lbl in stringCoords)
 			{
-				var str = lbl.Item1;
-				var coords = lbl.Item2;
-
-				var strX = coords.Item1;
-				var strY = coords.Item2;
-
-				CopyStringIntoBuffer(str, strX, strY);
+				WriteStringToCoord(lbl.Item1, lbl.Item2);
 			}
+
+            foreach (var ioCord in ioCords)
+            {
+				WriteStringToCoord(ioCord.Key.ArrayToString(), ioCord.Value);
+            }
 		}
+
+        private void WriteStringToCoord(string str, Tuple<int, int> coords)
+        {
+            var strX = coords.Item1;
+            var strY = coords.Item2;
+
+            CopyStringIntoBuffer(str, strX, strY);
+        }
 
 		private void CopyStringIntoBuffer(string str, int x, int y){
 			for(int i = 0; i < str.Length; i++){
@@ -113,20 +126,21 @@ namespace Terminal
 					}
 
 					buffer[charY][charX] = str[i];
-				}
+            }
 		}
 
 		private bool ContainsCoords(int x, int y){
 			return x >= 0 && x < m_width && y >= 0 && y < m_height;
 		}
 
-		private void ClearBuffer(){
-			for(int i = 0; i < buffer.Length; i++)
-			{
-				for(int j = 0; j < buffer[i].Length; j++){
-					buffer[i][j] = ' ';
-				}
-			}
-		}
+		private void ClearBuffer()
+        {
+            foreach (var array in buffer)
+            {
+                for(int j = 0; j < array.Length; j++){
+                    array[j] = ' ';
+                }
+            }
+        }
 	}
 }

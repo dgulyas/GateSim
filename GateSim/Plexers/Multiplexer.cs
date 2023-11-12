@@ -48,8 +48,8 @@ namespace GateSim.Plexers
 		}
 
 		public string GetStateString()
-		{
-			throw new NotImplementedException();
-		}
+        {
+            return Output.ArrayToString();
+        }
 	}
 }

@@ -56,6 +56,14 @@ namespace GateSim
 			return Convert.ToString(num, 2).PadLeft(bitWidth).Reverse().Select(s => s.Equals('1')).ToArray();
 		}
 
+		/// <summary>
+		/// Converts a bool array into a string where 1 = true and 0 = false.
+		/// Puts the [0]'th element on the right, so it "reverses" the string.
+		/// This lets you read the bool array as a binary number with [0] as the
+		/// least significant digit.
+		/// </summary>
+		/// <param name="array"></param>
+		/// <returns></returns>
 		public static string ArrayToString(this bool[] array)
 		{
 			var state = "";
