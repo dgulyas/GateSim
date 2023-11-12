@@ -2,6 +2,12 @@
 
 namespace Terminal.Simulations
 {
+    // This is basically a test harness for CPU 1. (GateSim\Simulations\Cpu01.cs)
+    // Notice how it needs to create the instructions and handle iterating
+    // through them/parsing them. This won't be needed when the CPU has program memory.
+    // A class under Terminal.Simulation should only have to define the layout of
+    // the screen (the coordinates) and then tick the cpu, getting the new screen
+    // from the terminal instance.
     public class Cpu01
     {
         public GateSim.Simulations.Cpu01 Sim;
@@ -14,7 +20,7 @@ namespace Terminal.Simulations
             new []{0,0,0,3,1},
             new []{1,0,0,3,1},
             new []{3,0,1,0,0},
-            new []{0,0,0,3,0},
+            new []{0,0,0,3,0}, //no-op so the result of the last instruction can be seen
             //new []{0,0,0,3,4},
             //new []{0,0,0,3,4},
             //new []{0,0,0,3,4},
@@ -34,16 +40,7 @@ namespace Terminal.Simulations
         public bool ClockTick()
         {
             SetNextInstruction();
-
-            var output = Terminal.RefreshScreen();
-
-            Console.WriteLine();
-            foreach(var line in output)
-            {
-                Console.WriteLine(line);
-            }
-            Console.WriteLine();
-
+            Terminal.PrintStateToConsole();
             Sim.ClockTick();
             return currInstructionIndex >= instructions.Count;
         }
