@@ -14,7 +14,7 @@ namespace Terminal.Simulations
             new []{0,0,0,3,1},
             new []{1,0,0,3,1},
             new []{3,0,1,0,0},
-            //new []{0,0,0,3,4},
+            new []{0,0,0,3,0},
             //new []{0,0,0,3,4},
             //new []{0,0,0,3,4},
             //new []{0,0,0,3,4},
@@ -31,10 +31,10 @@ namespace Terminal.Simulations
             DefineCoords();
         }
 
-        public void ClockTick()
+        public bool ClockTick()
         {
             SetNextInstruction();
-            Sim.ClockTick();
+
             var output = Terminal.RefreshScreen();
 
             Console.WriteLine();
@@ -44,7 +44,8 @@ namespace Terminal.Simulations
             }
             Console.WriteLine();
 
-            
+            Sim.ClockTick();
+            return currInstructionIndex >= instructions.Count;
         }
 
         private void SetNextInstruction()
@@ -84,6 +85,8 @@ namespace Terminal.Simulations
 
             Terminal.AddString("Literal", 48, 10);
             Terminal.AddIO(Sim.Literal, 50, 11);
+
+            Terminal.AddString("Funcs: add, sub, neg, lit", 2, 13);
         }
 
     }

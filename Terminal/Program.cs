@@ -13,9 +13,10 @@ namespace Terminal
 		{
 			var cpu = new Cpu01();
 
-            while (true)
+            var finished = false;
+            while (!finished)
             {
-				cpu.ClockTick();
+				finished = cpu.ClockTick();
                 Console.ReadLine();
             }
         }
